@@ -1,3 +1,14 @@
+## 소개
+- Okkal은 의류 상의 혹은 하의중에 한쪽 색상만 정하고 다른쪽 색상은 정하지 못했을때 가상으로 내가 선택한 색을 입혀보거나 색상을 추천받을수 있는 안드로이드 앱 입니다.
+
+## 개발환경
+- Android Studio Giraffe | 2022.3.1 Patch 2
+- Java 1.8
+
+## Sdk Version
+- minSdkVersion : 24
+- targetSdkVersion : 34
+
 ## 기술스택
 - 언어
   - Kotlin, XML, Coroutine
