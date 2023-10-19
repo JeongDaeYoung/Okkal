@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">오깔</string>
+
+    <!--firstFragment-->
+    <string name="take_picture">사진촬영</string>
+    <string name="shirts">상의</string>
+    <string name="pants">하의</string>
+
+
+    <!--ToastMessage-->
+    <string name="toast_app_finish">뒤로가기 버튼을 한번 더 누르면 종료됩니다.</string>
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92562514596",
+    "project_id": "okkal-22ac4",
+    "storage_bucket": "okkal-22ac4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92562514596:android:75a4c6ce124c1845a13c31",
+        "android_client_info": {
+          "package_name": "com.daeng.okkal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZdeKBD7smpddOdWxAAk7qw_56yFUsiYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
