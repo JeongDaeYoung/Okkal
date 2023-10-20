@@ -1,5 +1,6 @@
 package com.daeng.okkal.data.room
 
+import android.graphics.Color
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,13 +14,13 @@ class RoomEntity {
         @Entity(tableName = Define.TABLE_INIT_APP)
         data class InitApp(
             @PrimaryKey
-            val id: String = Define.CLIENT_ID,
-            @ColumnInfo(Define.COL_INIT_APP_SHIRTS_COLOR)
-            val shirtsColor: Int? = null,
-            @ColumnInfo(Define.COL_INIT_APP_PANTS_COLOR)
-            val pantsColor: Int? = null,
-            @ColumnInfo(Define.COL_INIT_APP_COLOR_LIST)
-            val colorList: List<Int>? = null
+            var id: String = Define.CLIENT_ID,
+            @ColumnInfo(name = Define.COL_INIT_APP_SHIRTS_COLOR)
+            var shirtsColor: Int? = Color.WHITE,
+            @ColumnInfo(name = Define.COL_INIT_APP_PANTS_COLOR)
+            var pantsColor: Int? = Color.BLACK
+//            @ColumnInfo(name = Define.COL_INIT_APP_COLOR_LIST)
+//            var colorList: List<Int>? = null
         )
     }
 }

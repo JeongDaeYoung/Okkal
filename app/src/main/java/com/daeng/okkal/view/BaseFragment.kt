@@ -15,7 +15,7 @@ abstract class BaseFragment<VB: ViewBinding>(private val inflate: Inflate2<VB>) 
 
     private var _binding: VB? = null
     val binding get() = _binding!!
-    lateinit var activity: MainActivity
+    lateinit var mActivity: MainActivity
 
     var loadingDialog = LoadingDialog()
 
@@ -27,7 +27,7 @@ abstract class BaseFragment<VB: ViewBinding>(private val inflate: Inflate2<VB>) 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as MainActivity
+        mActivity = context as MainActivity
     }
 
     override fun onDestroyView() {

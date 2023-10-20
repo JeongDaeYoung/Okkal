@@ -14,7 +14,9 @@ import com.daeng.okkal.viewmodel.FashionPaletteVM
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     companion object {
         const val FRAGMENT_FIRST = 0  // 0. FirstFragment

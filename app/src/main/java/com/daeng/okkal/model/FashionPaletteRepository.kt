@@ -1,36 +1,46 @@
 package com.daeng.okkal.model
 
-import android.graphics.Color
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.daeng.okkal.global.Define
+import com.daeng.okkal.data.room.RoomDao
+import com.daeng.okkal.data.room.RoomEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * Created by JDY on 2023-10-18
  */
-object FashionPaletteRepository {
-    private val selPart = MutableLiveData<Int>(Define.SEL_SHIRTS)
-    private val shirtsColor = MutableLiveData<Int>(Color.WHITE)
-    private val pantsColor = MutableLiveData<Int>(Color.BLACK)
-
-    fun getSelPart() : LiveData<Int> {
-        return selPart
-    }
-    fun getShirtsColor() : LiveData<Int> {
-        return shirtsColor
-    }
-    fun getPantsColor() : LiveData<Int> {
-        return pantsColor
+class FashionPaletteRepository @Inject constructor(private val myDao : RoomDao.InitAppDao) {
+    suspend fun getShirtsColor() : Int{
+        return withContext(Dispatchers.IO) {
+            myDao.getShirtsColor()
+        }
     }
 
+    suspend fun getPantsColor() : Int {
+        return withContext(Dispatchers.IO) {
+            myDao.getPantsColor()
+        }
+    }
 
-    fun updateSelPart(part : Int) {
-        selPart.value = part
+    fun updateShirtsColor(color: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            myDao.updateShirtsColor(color)
+        }
     }
-    fun updateShirtsColor(color : Int) {
-        shirtsColor.value = color
+
+    fun updatePantsColor(color: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            myDao.updatePantsColor(color)
+        }
     }
-    fun updatePantsColor(color : Int) {
-        pantsColor.value = color
+
+    fun initColorData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (myDao.getAll().isEmpty()) {
+                myDao.insert(RoomEntity.Companion.InitApp())
+            }
+        }
     }
 }

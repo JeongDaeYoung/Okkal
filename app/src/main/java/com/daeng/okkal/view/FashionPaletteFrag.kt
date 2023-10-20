@@ -24,6 +24,7 @@ import com.daeng.okkal.view.dialog.PhotoDialog
 import com.daeng.okkal.view.dialog.ViewCloseListener
 import com.daeng.okkal.viewmodel.FashionPaletteVM
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -31,6 +32,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 
+@AndroidEntryPoint
 class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPaletteFragBinding::inflate) {
 
     private val viewModel: FashionPaletteVM by viewModels()
@@ -125,7 +127,7 @@ class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPalett
 
                         photoDialog = PhotoDialog(rotateBitmap(bitmap, angle))
                         photoDialog!!.setViewCloseListener(ViewCloseListener { rgb ->
-                            if (rgb != -1) setSelPartColor(rgb as Int)        // 옷 색상 업데이트
+                            if (rgb != -1) viewModel.setSelPartColor(rgb as Int)        // 옷 색상 업데이트
                             // 비트맵 메모리 해제
                             bitmap.recycle()
                             bitmap = null
@@ -187,9 +189,9 @@ class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPalett
         /*
         * 카메라 호출전 인텐트에 사진 파일명 추가(고화질 사진으로 불러오기 위한 작업)
         * */
-        if (intent.resolveActivity(activity.packageManager) != null) {
+        if (intent.resolveActivity(mActivity.packageManager) != null) {
             var photoFile: File? = null
-            var tempDir = activity.cacheDir
+            var tempDir = mActivity.cacheDir
 
             val imageFileName = "Clothes_Photo"
 
@@ -203,7 +205,7 @@ class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPalett
             }
 
             if (photoFile != null) {
-                val photoURI = FileProvider.getUriForFile(activity, activity.packageName + ".fileprovider", photoFile)
+                val photoURI = FileProvider.getUriForFile(mActivity, mActivity.packageName + ".fileprovider", photoFile)
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 activityResultLauncher.launch(intent)
             }
@@ -218,7 +220,6 @@ class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPalett
         binding.imgShirts.setColorFilter(rgb)
     }
 
-
     /*
     * 하의 색상 변경
     * */
@@ -226,14 +227,7 @@ class FashionPaletteFrag : BaseFragment<FashionPaletteFragBinding>(FashionPalett
         binding.imgPants.setColorFilter(rgb)
     }
 
-
-    /*
-    * 현재 선택된 부위에 색상 업데이트
-    * */
-    private fun setSelPartColor(color: Int) {
-        when(viewModel.selPart.value) {
-            Define.SEL_SHIRTS -> viewModel.updateShirtsColor(color)
-            Define.SEL_PANTS -> viewModel.updatePantsColor(color)
-        }
+    private fun setSelPartColor(color : Int) {
+        viewModel.setSelPartColor(color)
     }
 }
