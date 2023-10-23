@@ -3,7 +3,7 @@
 
 ## 개발환경
 - Android Studio Giraffe | 2022.3.1 Patch 2
-- Java 1.8
+- Java 11
 
 ## Sdk Version
 - minSdkVersion : 24
