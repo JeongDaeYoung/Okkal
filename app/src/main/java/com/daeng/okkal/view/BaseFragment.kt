@@ -35,10 +35,20 @@ abstract class BaseFragment<VB: ViewBinding>(private val inflate: Inflate2<VB>) 
         _binding = null
     }
 
+
+    /*
+    * 화면에 로딩 다이얼로그를 표시
+    * 사용자에게 작업이 진행 중임을 알림
+    * */
     fun showLoading() {
         loadingDialog.show(parentFragmentManager, "loading")
     }
 
+
+    /*
+    * 화면에서 로딩 다이얼로그를 숨김
+    * 작업이 완료 되었거나 오류가 발생했을때 호출
+    * */
     fun dismissLoading() {
         loadingDialog.dismiss()
     }

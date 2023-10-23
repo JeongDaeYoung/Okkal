@@ -5,12 +5,10 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import com.daeng.okkal.BuildConfig
 import com.daeng.okkal.R
 import com.daeng.okkal.databinding.MainActivityBinding
 import com.daeng.okkal.global.Define
-import com.daeng.okkal.viewmodel.FashionPaletteVM
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -25,9 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var binding: MainActivityBinding
-    lateinit var viewModel: FashionPaletteVM
 
-    private var firstFragment: FashionPaletteFrag?                    = null    // 1. FirstFragment
+    private var firstFragment: FashionFittingFrag?           = null    // 1. FirstFragment
     private var secondFragment: SecondFrag?                  = null    // 2. SecondFragment
     private var thirdFragment: ThirdFrag?                    = null    // 3. ThirdFragment
 
@@ -63,9 +60,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         this.onBackPressedDispatcher.addCallback(this,callBack)            // 뒤로가기 콜백 추가
 
-        viewModel = ViewModelProvider(this).get(FashionPaletteVM::class.java)
-        binding.viewModel = viewModel
-
         initBottomNavi()                       // 바텀 네비게이션 초기화
         moveFragment(FRAGMENT_FIRST)           // 홈화면으로 초기화
     }
@@ -76,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     * */
     private fun initFragment(fragment: Int) {
         when(fragment) {
-            FRAGMENT_FIRST -> if (firstFragment==null) firstFragment = FashionPaletteFrag()
+            FRAGMENT_FIRST -> if (firstFragment==null) firstFragment = FashionFittingFrag()
             FRAGMENT_SECOND -> if (secondFragment==null) secondFragment = SecondFrag()
             FRAGMENT_THIRD -> if (thirdFragment==null) thirdFragment = ThirdFrag()
         }

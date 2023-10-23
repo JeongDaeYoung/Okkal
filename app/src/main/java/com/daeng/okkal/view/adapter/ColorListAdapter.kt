@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class ColorListAdapter (val selListColor: (Int) -> Unit) : RecyclerView.Adapter<ColorListAdapter.ViewHolder>() {
     lateinit var binding: ColorListItemBinding
-    private var arColorSet: HashSet<Int> = HashSet()
+    private var arColorSet: List<Int> = emptyList()
     lateinit var  context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,12 +36,8 @@ class ColorListAdapter (val selListColor: (Int) -> Unit) : RecyclerView.Adapter<
         return arColorSet.size
     }
 
-    fun setItem(arColorSet: HashSet<Int>) {
+    fun setItem(arColorSet: List<Int>) {
         this.arColorSet = arColorSet
-    }
-
-    fun addItem(colorItem: Int) {
-        arColorSet.add(colorItem)
     }
 
 

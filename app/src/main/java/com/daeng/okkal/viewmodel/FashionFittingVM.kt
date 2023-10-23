@@ -1,21 +1,23 @@
 package com.daeng.okkal.viewmodel
 
-import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.daeng.okkal.data.room.RoomEntity
 import com.daeng.okkal.global.Define
-import com.daeng.okkal.model.FashionPaletteRepository
+import com.daeng.okkal.model.FashionFittingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.LinkedList
 import javax.inject.Inject
 
 @HiltViewModel
-class FashionPaletteVM @Inject constructor(private val myRepository : FashionPaletteRepository): ViewModel() {
+class FashionFittingVM @Inject constructor(private val myRepository : FashionFittingRepository): ViewModel() {
     private val _selPart : MutableLiveData<Int> = MutableLiveData(Define.SEL_SHIRTS)
-    private val _shirtsColor : MutableLiveData<Int> = MutableLiveData(Color.WHITE)
-    private val _pantsColor : MutableLiveData<Int> = MutableLiveData(Color.BLACK)
+    private val _shirtsColor : MutableLiveData<Int> = MutableLiveData()
+    private val _pantsColor : MutableLiveData<Int> = MutableLiveData()
+    private val _colorList : MutableLiveData<LinkedList<Int>> = MutableLiveData()
 
     val selPart : LiveData<Int>
         get() = _selPart
@@ -23,22 +25,34 @@ class FashionPaletteVM @Inject constructor(private val myRepository : FashionPal
         get() = _shirtsColor
     val pantsColor : LiveData<Int>
         get() = _pantsColor
+    val colorList : LiveData<LinkedList<Int>>
+        get() = _colorList
 
     init {
-        getShirtsColor()
-        getPantsColor()
-        myRepository.initColorData()
+        viewModelScope.launch {
+            myRepository.initColorData()
+            loadColorData()
+        }
     }
 
-    private fun getShirtsColor() {
+    private fun loadShirtsColor() {
         viewModelScope.launch{
             _shirtsColor.value = myRepository.getShirtsColor()
         }
     }
 
-    private fun getPantsColor() {
+    private fun loadPantsColor() {
         viewModelScope.launch{
             _pantsColor.value = myRepository.getPantsColor()
+        }
+    }
+
+    private fun loadColorData() {
+        viewModelScope.launch {
+            val data: RoomEntity.Companion.InitApp = myRepository.getColorData()
+            _shirtsColor.value = data.shirtsColor
+            _pantsColor.value = data.pantsColor
+            _colorList.value = LinkedList(data.colorData.colorList)
         }
     }
 
@@ -49,11 +63,21 @@ class FashionPaletteVM @Inject constructor(private val myRepository : FashionPal
     fun updateShirtsColor(color: Int) {
         myRepository.updateShirtsColor(color)
         _shirtsColor.postValue(color)
+        addColorList(color)
     }
 
     fun updatePantsColor(color: Int) {
         myRepository.updatePantsColor(color)
         _pantsColor.postValue(color)
+        addColorList(color)
+    }
+
+    fun addColorList(color : Int) {
+        val list = _colorList.value
+        list!!.remove(color)
+        list!!.addFirst(color)
+        myRepository.updateColorList(ArrayList(list))
+        _colorList.postValue(list!!)
     }
 
 
