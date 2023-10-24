@@ -1,6 +1,9 @@
 ## 소개
 - Okkal은 의류 상의 혹은 하의중에 한쪽 색상만 정하고 다른쪽 색상은 정하지 못했을때 가상으로 내가 선택한 색을 입혀보거나 색상을 추천받을수 있는 안드로이드 앱 입니다.
 
+## 개발기간
+- 2023-09 ~ ing
+
 ## 개발환경
 - Android Studio Giraffe | 2022.3.1 Patch 2
 - Java 11
@@ -20,3 +23,10 @@
   - LiveData, ViewModel, DataBinding, Room, Lottie, Firebase, RecyclerView, Logger
 
 ## Project 구조
+- app/......../okkal/api       : 외부 API와 관련된 코드
+- app/......../okkal/data      : RoomDB 코드 및 데이터 클래스 패키지
+- app/......../okkal/global    : 전역 상수 및 설정 클래스 패키지
+- app/......../okkal/model     : 데이터 모델 및 Repository 패키지
+- app/......../okkal/util      : 유틸리티 클래스 및 도우미 함수 패키지
+- app/......../okkal/view      : 액티비티, 프래그먼트, 다이얼로그와 같은 사용자 인터페이스를 표시하는 클래스 패키지
+- app/......../okkal/viewmodel : 뷰모델 클래스 패키지
