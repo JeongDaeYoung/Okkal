@@ -17,7 +17,7 @@ abstract class BaseFragment<VB: ViewBinding>(private val inflate: Inflate2<VB>) 
     val binding get() = _binding!!
     lateinit var mActivity: MainActivity
 
-    var loadingDialog = LoadingDialog()
+    private var loadingDialog = LoadingDialog()
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

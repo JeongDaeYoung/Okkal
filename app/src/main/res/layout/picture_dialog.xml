@@ -10,13 +10,14 @@
         android:layout_width="400dp"
         android:layout_height="600dp"
         android:orientation="vertical"
-        android:background="@drawable/shape_gray_radius"
+        android:background="@drawable/shape_white_radius"
         >
         <TextView
             android:id="@+id/txt_color"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white" />
+            android:background="@color/white"
+            android:layout_margin="10dp"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_picture"
@@ -26,13 +27,16 @@
 
         <Button
             android:id="@+id/btn_ok"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="50dp"
-            android:background="@drawable/shape_gray_radius"
-            android:text="확인"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:background="@drawable/shape_common_button"
+            android:text="@string/common_ok"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/nanumgothic"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             />
     </LinearLayout>
 </layout>

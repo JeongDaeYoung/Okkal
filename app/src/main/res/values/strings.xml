@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">오깔</string>
 
-    <!--BottomMenu-->
-    <string name="bottom_menu_fitting">피팅</string>
-    <string name="bottom_menu_setting">설정</string>
+    <!--Common-->
+    <string name="common_ok">확인</string>
+
+    <!--TabLayoutItem-->
+    <string name="tab_item_fitting">피팅</string>
+    <string name="tab_item_setting">설정</string>
 
     <!--firstFragment-->
     <string name="take_picture">사진촬영</string>

@@ -16,9 +16,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            />
+            android:layout_height="match_parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_color"
@@ -38,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_common_button"
-            android:text="확인"
+            android:text="@string/common_ok"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:fontFamily="@font/nanumgothic"

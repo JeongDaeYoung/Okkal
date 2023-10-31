@@ -15,9 +15,9 @@ import com.orhanobut.logger.Logger
  * Created by JDY on 2023-10-12
  */
 class ColorRecommendedDialog(private val color: Int, private val viewCloseListener: ViewCloseListener): BaseDialogFragment<ColorRecommendedDialogBinding>(ColorRecommendedDialogBinding::inflate) {
-    var colorListAdapter: RecommendedColorListAdapter? = null
-    var colorList: HashSet<Int> = HashSet()
-    var selColor: Int? = null
+    private var colorListAdapter: RecommendedColorListAdapter? = null
+    private var colorList: HashSet<Int> = HashSet()
+    private var selColor: Int? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,10 +51,13 @@ class ColorRecommendedDialog(private val color: Int, private val viewCloseListen
     * */
     private fun recursiveHsv(hsvValue: FloatArray, offSet: Float) {
         hsvValue[2] += offSet
+
         if (hsvValue[2] > 0 && hsvValue[2] < 1) {
+            // hsvValue[2]의 값(명도)이 0보다 크고 1보다 작을때 색상을 추가하고 재귀
             colorList.add(Color.HSVToColor(hsvValue))
             recursiveHsv(hsvValue, offSet)
         } else {
+            // hsvValue[2]의 값(명도)이 0 이하 또는 1 이상인 경우 재귀를 종료
             return
         }
     }

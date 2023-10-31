@@ -9,6 +9,8 @@ import com.daeng.okkal.BuildConfig
 import com.daeng.okkal.R
 import com.daeng.okkal.databinding.MainActivityBinding
 import com.daeng.okkal.global.Define
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -58,9 +60,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)                                      // 툴바를 액션바로 사용하도록 셋팅
+        supportActionBar?.setDisplayShowTitleEnabled(false)                       // 툴바의 기본 타이틀 제거
+
         this.onBackPressedDispatcher.addCallback(this,callBack)            // 뒤로가기 콜백 추가
 
-        initBottomNavi()                       // 바텀 네비게이션 초기화
+        initTabLayout()                       // 상단탭 초기화
         moveFragment(FRAGMENT_FIRST)           // 홈화면으로 초기화
     }
 
@@ -95,17 +100,27 @@ class MainActivity : AppCompatActivity() {
 
 
     /*
-    * 바텀 네비게이션 초기화
+    * 상단탭 초기화
     * */
-    private fun initBottomNavi() {
-        binding.bottomNavi.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.home -> moveFragment(FRAGMENT_FIRST)           // FirstFragment
-                R.id.setting -> moveFragment(FRAGMENT_SECOND)       // SecondFragment
-                R.id.food -> moveFragment(FRAGMENT_THIRD)           // ThirdFragment
+    private fun initTabLayout() {
+        binding.tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position) {
+                    FRAGMENT_FIRST -> moveFragment(FRAGMENT_FIRST)           // FirstFragment
+                    FRAGMENT_SECOND -> moveFragment(FRAGMENT_SECOND)       // SecondFragment
+                    FRAGMENT_THIRD -> moveFragment(FRAGMENT_THIRD)           // ThirdFragment
+                }
             }
-            true
-        }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // 탭이 선택 해제됐을 때 실행할 동작
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // 이미 선택된 탭을 다시 선택했을 때 실행할 동작
+            }
+
+        })
     }
 
     /*
