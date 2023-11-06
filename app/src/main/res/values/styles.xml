@@ -3,7 +3,7 @@
     <style name="TabLayout" parent="Widget.Design.TabLayout">
         <item name="tabGravity">fill</item>
         <item name="tabIndicatorColor">@color/primary</item>
-        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabIndicatorFullWidth">false</item>
         <item name="tabBackground">@drawable/shape_tabs</item>
         <item name="tabIndicatorGravity">bottom</item>
         <item name="tabMode">fixed</item>
