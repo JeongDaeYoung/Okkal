@@ -20,6 +20,7 @@ import com.daeng.okkal.databinding.FashionFittingFragBinding
 import com.daeng.okkal.view.adapter.ColorListAdapter
 import com.daeng.okkal.global.Define
 import com.daeng.okkal.util.RecyclerViewDecoration
+import com.daeng.okkal.view.dialog.ColorPickerDialog
 import com.daeng.okkal.view.dialog.ColorRecommendedDialog
 import com.daeng.okkal.view.dialog.PhotoDialog
 import com.daeng.okkal.view.dialog.ViewCloseListener
@@ -66,6 +67,12 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
 
         binding.btnTakePicture.setOnClickListener {
             takePicture()                // 카메라 액티비티 호출
+        }
+
+        binding.btnColorPicker.setOnClickListener {   // 색상선택 도구
+            ColorPickerDialog(ViewCloseListener {
+                if (it != null) setSelPartColor(it as Int)
+            }).show(parentFragmentManager, "colorPicker")
         }
     }
 

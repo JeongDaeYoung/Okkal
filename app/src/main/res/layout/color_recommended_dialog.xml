@@ -12,12 +12,6 @@
         android:background="@drawable/shape_white_radius"
         >
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_color"
             android:layout_width="300dp"
