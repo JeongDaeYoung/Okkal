@@ -137,8 +137,8 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
                         val angle = getImageRotate(mCurrentPhotoPath)
 
                         photoDialog = PhotoDialog(rotateBitmap(bitmap, angle))
-                        photoDialog!!.setViewCloseListener(ViewCloseListener { rgb ->
-                            if (rgb != -1) viewModel.setSelPartColor(rgb as Int)        // 옷 색상 업데이트
+                        photoDialog!!.setViewCloseListener(ViewCloseListener { color ->
+                            if (color != null) viewModel.setSelPartColor(color as Int)        // 옷 색상 업데이트
                             // 비트맵 메모리 해제
                             bitmap.recycle()
                             bitmap = null
