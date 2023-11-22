@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.daeng.okkal.data.room.RoomEntity
 import com.daeng.okkal.global.Define
 import com.daeng.okkal.model.FashionFittingRepository
+import com.daeng.okkal.util.RecentColorLinkedList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.LinkedList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +17,7 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
     private val _selPart : MutableLiveData<Int> = MutableLiveData(Define.SEL_SHIRTS)
     private val _shirtsColor : MutableLiveData<Int> = MutableLiveData()
     private val _pantsColor : MutableLiveData<Int> = MutableLiveData()
-    private val _colorList : MutableLiveData<LinkedList<Int>> = MutableLiveData()
+    private val _colorList : MutableLiveData<RecentColorLinkedList<Int>> = MutableLiveData()
 
     val selPart : LiveData<Int>
         get() = _selPart
@@ -25,7 +25,7 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
         get() = _shirtsColor
     val pantsColor : LiveData<Int>
         get() = _pantsColor
-    val colorList : LiveData<LinkedList<Int>>
+    val colorList : LiveData<RecentColorLinkedList<Int>>
         get() = _colorList
 
     init {
@@ -52,7 +52,7 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
             val data: RoomEntity.Companion.InitApp = myRepository.getColorData()
             _shirtsColor.value = data.shirtsColor
             _pantsColor.value = data.pantsColor
-            _colorList.value = LinkedList(data.colorData.colorList)
+            _colorList.value = RecentColorLinkedList.fromList(data.colorData.colorList)
         }
     }
 
@@ -74,8 +74,7 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
 
     fun addColorList(color : Int) {
         val list = _colorList.value
-        list!!.remove(color)
-        list!!.addFirst(color)
+        list!!.addColor(color)
         myRepository.updateColorList(ArrayList(list))
         _colorList.postValue(list!!)
     }

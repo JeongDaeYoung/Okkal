@@ -34,7 +34,6 @@ class PhotoDialog(private val photo: Bitmap) : BaseDialogFragment<PictureDialogB
     * */
     private fun initColorPicker() {
         binding.colorPicker.setPaletteDrawable(BitmapDrawable(activity.resources, photo))        // 비트맵 Drawable로 변환후
-        binding.colorPicker.attachBrightnessSlider(binding.brightnessBar)     //밝기 조절 슬라이더 연결
 
         binding.colorPicker.setColorListener(ColorEnvelopeListener { envelope, fromUser ->                             //색상 선택표에서 색상이 선택됐을때 할 작업
             val drawable = ContextCompat.getDrawable(activity, R.drawable.shape_circle_stroke) as GradientDrawable
