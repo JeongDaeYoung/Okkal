@@ -15,13 +15,10 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.daeng.okkal.databinding.FashionFittingFragBinding
 import com.daeng.okkal.view.adapter.ColorListAdapter
 import com.daeng.okkal.global.Define
 import com.daeng.okkal.util.GridRecyclerViewDecoration
-import com.daeng.okkal.util.RecyclerViewDecoration
 import com.daeng.okkal.view.dialog.ColorPickerDialog
 import com.daeng.okkal.view.dialog.ColorRecommendedDialog
 import com.daeng.okkal.view.dialog.PhotoDialog
@@ -55,7 +52,7 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
 
         binding.btnRecommended.setOnClickListener {
             ColorRecommendedDialog(viewModel.getOtherPartColor()!!, ViewCloseListener {
-                if (it != null) setSelPartColor(it as Int)
+                if (it != null) setNewPartColor(it as Int)
             }).show(parentFragmentManager, "colorRecommended")
         }
 
@@ -73,7 +70,7 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
 
         binding.btnColorPicker.setOnClickListener {   // 색상선택 도구
             ColorPickerDialog(ViewCloseListener {
-                if (it != null) setSelPartColor(it as Int)
+                if (it != null) setNewPartColor(it as Int)
             }).show(parentFragmentManager, "colorPicker")
         }
     }
@@ -86,7 +83,7 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
         binding.listColor.apply {
             layoutManager = GridLayoutManager(this.context, 6)                        // 그리드 형태로 생성
             addItemDecoration(GridRecyclerViewDecoration(6, 16))              // 아이템 사이 간격 조절
-            colorListAdapter = ColorListAdapter(::setSelPartColor)                              // 상의 및 하의 색상변경하는 함수 전달
+            colorListAdapter = ColorListAdapter(::setRecentPartColor)                              // 상의 및 하의 색상변경하는 함수 전달
             adapter = colorListAdapter
         }
     }
@@ -140,7 +137,7 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
 
                         photoDialog = PhotoDialog(rotateBitmap(bitmap, angle))
                         photoDialog!!.setViewCloseListener(ViewCloseListener { color ->
-                            if (color != null) viewModel.setSelPartColor(color as Int)        // 옷 색상 업데이트
+                            if (color != null) setNewPartColor(color as Int)        // 옷 색상 업데이트
                             // 비트맵 메모리 해제
                             bitmap.recycle()
                             bitmap = null
@@ -241,9 +238,16 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
     }
 
     /*
-    * 리사이클러뷰에서 상의 및 하의 색상을 바로 바꾸기 위해 넘기는 함수
+    * 현재 선택된 부위에 색상 업데이트 및 최근 색상 리스트에 추가
     * */
-    private fun setSelPartColor(color : Int) {
-        viewModel.setSelPartColor(color)
+    private fun setNewPartColor(color : Int) {
+        viewModel.setNewPartColor(color)
+    }
+
+    /*
+    * 현재 선택된 부위에 색상 업데이트 (최근 선택 색상 리사이클러뷰 어댑터에서 사용)
+    * */
+    private fun setRecentPartColor(color : Int) {
+        viewModel.setRecentPartColor(color)
     }
 }

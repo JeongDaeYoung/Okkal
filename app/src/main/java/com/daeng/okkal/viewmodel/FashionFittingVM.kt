@@ -60,19 +60,17 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
         _selPart.value = part
     }
 
-    fun updateShirtsColor(color: Int) {
+    private fun updateShirtsColor(color: Int) {
         myRepository.updateShirtsColor(color)
         _shirtsColor.postValue(color)
-        addColorList(color)
     }
 
-    fun updatePantsColor(color: Int) {
+    private fun updatePantsColor(color: Int) {
         myRepository.updatePantsColor(color)
         _pantsColor.postValue(color)
-        addColorList(color)
     }
 
-    fun addColorList(color : Int) {
+    private fun addColorList(color : Int) {
         val list = _colorList.value
         list!!.addColor(color)
         myRepository.updateColorList(ArrayList(list))
@@ -81,9 +79,21 @@ class FashionFittingVM @Inject constructor(private val myRepository : FashionFit
 
 
     /*
+    * 현재 선택된 부위에 색상 업데이트 및 최근 색상 리스트에 추가
+    * */
+    fun setNewPartColor(color: Int) {
+        when(selPart.value) {
+            Define.SEL_SHIRTS -> updateShirtsColor(color)
+            Define.SEL_PANTS -> updatePantsColor(color)
+        }
+        addColorList(color)
+    }
+
+
+    /*
     * 현재 선택된 부위에 색상 업데이트
     * */
-    fun setSelPartColor(color: Int) {
+    fun setRecentPartColor(color: Int) {
         when(selPart.value) {
             Define.SEL_SHIRTS -> updateShirtsColor(color)
             Define.SEL_PANTS -> updatePantsColor(color)
