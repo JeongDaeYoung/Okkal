@@ -10,14 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.daeng.okkal.R
 import com.daeng.okkal.databinding.ColorListItemBinding
+import com.daeng.okkal.databinding.RecommendedColorListItemBinding
 
 class RecommendedColorListAdapter(val selListColor: (Int) -> Unit) : RecyclerView.Adapter<RecommendedColorListAdapter.ViewHolder>() {
-    lateinit var binding: ColorListItemBinding
+    lateinit var binding: RecommendedColorListItemBinding
     private var arColorSet: HashSet<Int> = HashSet()
     lateinit var  context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ColorListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = RecommendedColorListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         context = parent.context
         return ViewHolder(binding.root)
     }

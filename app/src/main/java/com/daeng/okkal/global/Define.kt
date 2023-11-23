@@ -13,7 +13,7 @@ object Define {
     const val SEL_SHIRTS = 0          // 상의 선택
     const val SEL_PANTS  = 1          // 하의 선택
 
-    const val MAX_RECENT_COLOR = 30   // 최근 선택 색상 최대개수
+    const val MAX_RECENT_COLOR = 18   // 최근 선택 색상 최대개수
 
     const val CLIENT_ID = "CLIENT"    // 사용자 ID (Room 테이블 주키로 쓰기 위함)
 

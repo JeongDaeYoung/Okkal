@@ -6,6 +6,7 @@
 
     <!--TabLayoutItem-->
     <string name="tab_item_fitting">피팅</string>
+    <string name="tab_item_temp_recommend">기온별 옷 추천</string>
     <string name="tab_item_setting">설정</string>
 
     <!--firstFragment-->

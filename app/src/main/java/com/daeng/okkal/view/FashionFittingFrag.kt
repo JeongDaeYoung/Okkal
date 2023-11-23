@@ -14,11 +14,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.daeng.okkal.databinding.FashionFittingFragBinding
 import com.daeng.okkal.view.adapter.ColorListAdapter
 import com.daeng.okkal.global.Define
+import com.daeng.okkal.util.GridRecyclerViewDecoration
 import com.daeng.okkal.util.RecyclerViewDecoration
 import com.daeng.okkal.view.dialog.ColorPickerDialog
 import com.daeng.okkal.view.dialog.ColorRecommendedDialog
@@ -82,8 +84,8 @@ class FashionFittingFrag : BaseFragment<FashionFittingFragBinding>(FashionFittin
     * */
     private fun initColorList() {
         binding.listColor.apply {
-            layoutManager = LinearLayoutManager(this.context, RecyclerView.HORIZONTAL, false)
-            addItemDecoration(RecyclerViewDecoration(40,0))                        // 아이템 사이 간격조정
+            layoutManager = GridLayoutManager(this.context, 6)                        // 그리드 형태로 생성
+            addItemDecoration(GridRecyclerViewDecoration(6, 16))              // 아이템 사이 간격 조절
             colorListAdapter = ColorListAdapter(::setSelPartColor)                              // 상의 및 하의 색상변경하는 함수 전달
             adapter = colorListAdapter
         }

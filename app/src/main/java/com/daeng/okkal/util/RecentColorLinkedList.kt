@@ -9,21 +9,21 @@ import java.util.LinkedList
  */
 
 
-class RecentColorLinkedList<E> : LinkedList<E>() {
+class RecentColorLinkedList<T> : LinkedList<T>() {
     /*
     * 최근 사용한 데이터 추기
     * */
-    fun addColor(e: E) {
-        remove(e)                             // 중복요소 제거
+    fun addColor(element: T) {
+        remove(element)                             // 중복요소 제거
         trimToSize()                          // 리스트 크기제한
-        super.addFirst(e)                     // 최근 사용한 데이터를 맨 앞에 추가
+        super.addFirst(element)                     // 최근 사용한 데이터를 맨 앞에 추가
     }
 
     /*
     * 리스트가 최대 크기를 넘어가면 사용한지 오래된 데이터를 삭제
     * */
     private fun trimToSize() {
-        while (size > Define.MAX_RECENT_COLOR) {
+        while (size >= Define.MAX_RECENT_COLOR) {
             removeLast()
         }
     }
