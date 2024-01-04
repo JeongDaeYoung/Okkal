@@ -48,11 +48,13 @@ import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 
 /**
  * Created by JDY on 2024-01-01
+ *
+ * 사진 색상 선택 다이얼로그
  */
 
 @Composable
 fun ImagePickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, imagePick: MutableState<Color>, imageBitmap: MutableState<Bitmap>) {
-    val controller = rememberColorPickerController()
+    val controller = rememberColorPickerController()      // ImageColorPicker에서 사용되는 컨트롤러
 
     val colorHex = remember { mutableStateOf("") }
 
@@ -68,7 +70,7 @@ fun ImagePickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, image
                     .padding(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ImageColorPicker(
+                ImageColorPicker(                                    // ImageBitmap을 가져와 터치한 포인트의 색상값을 추출하는 뷰 (skydoves/ColorPickerView)
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(500.dp)
@@ -76,7 +78,7 @@ fun ImagePickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, image
                     controller = controller,
                     paletteImageBitmap = imageBitmap.value.asImageBitmap(),
                     paletteContentScale = PaletteContentScale.FIT,
-                    onColorChanged = {
+                    onColorChanged = {                               // 사진을 터치해 색상이 바뀔때마다 호출
                             colorEnvelope: ColorEnvelope ->
                         imagePick.value = colorEnvelope.color
                         colorHex.value = colorEnvelope.hexCode
@@ -99,7 +101,7 @@ fun ImagePickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, image
                 }
 
                 Button(
-                    onClick = { onClickedOK() },
+                    onClick = { onClickedOK() },                      // 상위뷰에 onClick함수 전달
                     modifier = Modifier
                         .width(80.dp)
                         .height(40.dp),

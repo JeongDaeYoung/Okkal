@@ -35,6 +35,8 @@ import com.daeng.okkal.R
 
 /**
  * Created by JDY on 2023-10-12
+ *
+ * 색상 추천 다이얼로그
  */
 @Composable
 fun ColorRecommDialog(
@@ -65,6 +67,9 @@ fun ColorRecommDialog(
             ) {
                 Spacer(modifier = Modifier.height(20.dp))
 
+                /*
+                * 추천 색상 목록을 보여주는 리스트뷰
+                * */
                 LazyRow(
                     modifier = Modifier
                         .width(300.dp)
@@ -77,16 +82,25 @@ fun ColorRecommDialog(
                 ) {
                     itemsIndexed(colors) { index, color ->
 
+                        /*
+                        * 리스트의 아이템 뷰
+                        * */
                         Box(modifier = Modifier
                             .width(50.dp)
                             .height(50.dp)
                             .background(Color(color), shape = RoundedCornerShape(10.dp))
                             .border(
-                                BorderStroke(
-                                    width = if (index == selRecommColor.value) 3.dp else 1.dp,
-                                    if (index == selRecommColor.value) androidx.compose.ui.graphics.Color.Red else colorResource(
-                                        id = R.color.dark_gray
-                                    )
+                                BorderStroke(                          // 선택되지 않은 색상은 1.dp gray 테두리, 선택된 색상은 3.dp Red 색상 테두리
+                                    width =
+                                    if (index == selRecommColor.value)
+                                        3.dp
+                                    else
+                                        1.dp,
+                                    color =
+                                    if (index == selRecommColor.value)
+                                        Color.Red
+                                    else
+                                        colorResource(id = R.color.dark_gray)
                                 ),
                                 shape = RoundedCornerShape(10.dp)
                             )
@@ -100,7 +114,7 @@ fun ColorRecommDialog(
                         )
 
                         if (index < colors.size - 1) {
-                            Spacer(modifier = Modifier.width(10.dp))
+                            Spacer(modifier = Modifier.width(10.dp))                     // 아이템간 간격 설정
                         }
                     }
                 }

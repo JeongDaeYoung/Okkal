@@ -41,6 +41,8 @@ import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 
 /**
  * Created by JDY on 2023-12-29
+ *
+ * 색상표 선택 다이얼로그
  */
 
 @Composable
@@ -58,19 +60,19 @@ fun ColorPickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, color
                     .padding(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                HsvColorPicker(
+                HsvColorPicker(                              // 원형 색상표에서 터치한 포인트의 색상값을 추출하는 뷰 (skydoves/ColorPickerView)
                     modifier = Modifier
                         .width(300.dp)
                         .height(300.dp)
                         .padding(10.dp),
                     controller = controller,
-                    onColorChanged = {
+                    onColorChanged = {                       // 사진을 터치해 색상이 바뀔때마다 호출
                         colorEnvelope: ColorEnvelope ->
                         colorPick.value = colorEnvelope.color
                     })
 
                 Row {
-                    Box(
+                    Box(                                    // 선택된 색상을 표시해주는 Box
                         modifier = Modifier
                             .width(40.dp)
                             .height(40.dp)
@@ -83,14 +85,14 @@ fun ColorPickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, color
                     )
 
                     Column {
-                        AlphaSlider(
+                        AlphaSlider(                         // HsvColorPicker에서 추출된 색상값의 투명도를 조절해주는 슬라이더
                             modifier = Modifier
                                 .width(250.dp)
                                 .padding(10.dp)
                                 .height(30.dp),
                             controller = controller)
 
-                        BrightnessSlider(
+                        BrightnessSlider(                    // HsvColorPicker에서 추출된 색상값의 명도를 조절해주는 슬라이더
                             modifier = Modifier
                                 .width(250.dp)
                                 .padding(10.dp)
@@ -101,7 +103,7 @@ fun ColorPickDialog(onDismissRequest: () -> Unit, onClickedOK: () -> Unit, color
                 }
 
                 Button(
-                    onClick = { onClickedOK() },
+                    onClick = { onClickedOK() },             // 상위뷰로 onClick 함수 전달
                     modifier = Modifier
                         .width(80.dp)
                         .height(40.dp),

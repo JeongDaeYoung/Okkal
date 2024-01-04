@@ -19,6 +19,8 @@ import com.daeng.okkal.R
 
 /**
  * Created by JDY on 2024-01-02
+ *
+ * 로딩 다이얼로그
  */
 
 
